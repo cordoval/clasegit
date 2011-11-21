@@ -7,7 +7,7 @@ public class Conversor {
 	int millares = 0;
 	PosicionNumeracionDecimal posicionMaximaNumeracionDecimal;
 
-	public String convertir(int valorConvertir) {
+	public String convierteNumeroDecimalToRomano(int valorConvertir) {
 		String resultado = "";
 
 		obtenerPosicionMaximoNumeroDecimal(valorConvertir);
