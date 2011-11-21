@@ -7,7 +7,7 @@ public class Conversor {
 	int millares = 0;
 	PosicionNumeracionDecimal posicionMaximaNumeracionDecimal;
 
-	public String convertirMejorado(int valorConvertir) {
+	public String convertir(int valorConvertir) {
 		String resultado = "";
 
 		obtenerPosicionMaximoNumeroDecimal(valorConvertir);
