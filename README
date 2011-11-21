@@ -1,3 +1,9 @@
+#Instructions#
+
+```sh
+java dojo/ConvertirNumeroDecimalToRomano ?
+```
+
 Alternativa de solución al Coding Dojo de Conversion de Números Decimales a Romanos.
 
 Saludos,
