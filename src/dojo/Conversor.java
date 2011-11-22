@@ -1,59 +1,42 @@
 package dojo;
 
-public class Conversor {
-	int unidades = 0;
-	int decenas = 0;
-	int centenas = 0;
-	int millares = 0;
-	PosicionNumeracionDecimal posicionMaximaNumeracionDecimal;
+import java.util.Map;
+import java.util.Stack;
 
-	public String convierteNumeroDecimalToRomano(int valorConvertir) {
+public class Conversor {
+
+	Map<Integer, String[]> caracteresRomanos = SimboloRomano
+			.obtenerCaracteresRomanos();
+
+	public String convertirNumeroDecimalToRomano(int valorConvertir) {
 		String resultado = "";
 
-		obtenerPosicionMaximoNumeroDecimal(valorConvertir);
+		String cadenaInvertida = new StringBuilder().append(valorConvertir)
+				.reverse().toString();
 
-		if (posicionMaximaNumeracionDecimal
-				.equals(PosicionNumeracionDecimal.UNIDADES)) {
-			resultado = obtenerUnidadesRomanas();
-		} else if (posicionMaximaNumeracionDecimal
-				.equals(PosicionNumeracionDecimal.DECENAS)) {
-			resultado = obtenerDecenasRomanas() + obtenerUnidadesRomanas();
-		} else if (posicionMaximaNumeracionDecimal
-				.equals(PosicionNumeracionDecimal.CENTENAS)) {
-			resultado = obtenerCentenasRomanas() + obtenerDecenasRomanas()
-					+ obtenerUnidadesRomanas();
-		} else if (posicionMaximaNumeracionDecimal
-				.equals(PosicionNumeracionDecimal.MILLARES)) {
-			resultado = obtenerMillaresRomanas() + obtenerCentenasRomanas()
-					+ obtenerDecenasRomanas() + obtenerUnidadesRomanas();
-		}
+		Stack<String> resultadoPreliminarPorPosicion = new Stack<String>();
+
+		for (int i = 0; i < cadenaInvertida.length(); i++)
+			resultadoPreliminarPorPosicion.push(obtenerCaracterRomanoSegunPosicion(
+					cadenaInvertida.charAt(i), i));
+
+		while (!resultadoPreliminarPorPosicion.empty())
+			resultado += resultadoPreliminarPorPosicion.pop();
+
 		return resultado;
 	}
 
-	private String obtenerUnidadesRomanas() {
-		return escribeRango1To9(unidades,
-				SimboloRomano.UNO.getRepresentacionRomana(),
-				SimboloRomano.CINCO.getRepresentacionRomana(),
-				SimboloRomano.DIEZ.getRepresentacionRomana());
-	}
+	private String obtenerCaracterRomanoSegunPosicion(Character valor, int posicion) {
+		String resultado = "";
 
-	private String obtenerDecenasRomanas() {
-		return escribeRango1To9(decenas,
-				SimboloRomano.DIEZ.getRepresentacionRomana(),
-				SimboloRomano.CINCUENTA.getRepresentacionRomana(),
-				SimboloRomano.CIEN.getRepresentacionRomana());
-	}
+		int valorNumerico = new Integer(valor.toString());
 
-	private String obtenerCentenasRomanas() {
-		return escribeRango1To9(centenas,
-				SimboloRomano.CIEN.getRepresentacionRomana(),
-				SimboloRomano.QUINIENTOS.getRepresentacionRomana(),
-				SimboloRomano.MIL.getRepresentacionRomana());
-	}
+		resultado = escribeRango1To9(valorNumerico,
+				caracteresRomanos.get(posicion)[0],
+				caracteresRomanos.get(posicion)[1],
+				caracteresRomanos.get(posicion)[2]);
 
-	private String obtenerMillaresRomanas() {
-		return escribeRango1To9(millares,
-				SimboloRomano.MIL.getRepresentacionRomana(), "", "");
+		return resultado;
 	}
 
 	private String escribeRango1To9(int valor, String romanoInferior,
@@ -83,13 +66,13 @@ public class Conversor {
 		String resultado = "";
 		int diferenciaLateral = valor - valorBase;
 
-		resultado = cuerpoRepetidoMejorado(diferenciaLateral,
+		resultado = cuerpoRepetido(diferenciaLateral,
 				simboloRomanoBase, simboloRomanoLateral);
 
 		return resultado;
 	}
 
-	private String cuerpoRepetidoMejorado(int diferenciaLateral,
+	private String cuerpoRepetido(int diferenciaLateral,
 			String simboloRomanoBase, String simboloRomanoLateral) {
 		String resultado = "";
 
@@ -107,25 +90,4 @@ public class Conversor {
 		return resultado;
 	}
 
-	private void obtenerPosicionMaximoNumeroDecimal(int numero) {
-		if (numero > 0 && numero < 10) {
-			posicionMaximaNumeracionDecimal = PosicionNumeracionDecimal.UNIDADES;
-			unidades = numero % 10;
-		} else if (numero >= 10 && numero < 100) {
-			posicionMaximaNumeracionDecimal = PosicionNumeracionDecimal.DECENAS;
-			unidades = numero % 10;
-			decenas = numero / 10;
-		} else if (numero >= 100 && numero < 1000) {
-			posicionMaximaNumeracionDecimal = PosicionNumeracionDecimal.CENTENAS;
-			unidades = numero % 10;
-			decenas = numero % 100 / 10;
-			centenas = numero / 100;
-		} else if (numero >= 1000 && numero < 10000) {
-			posicionMaximaNumeracionDecimal = PosicionNumeracionDecimal.MILLARES;
-			unidades = numero % 10;
-			decenas = numero % 100 / 10;
-			centenas = numero % 1000 / 100;
-			millares = numero / 1000;
-		}
-	}
 }
