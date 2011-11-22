@@ -9,7 +9,7 @@ public class Conversor {
 			.obtenerCaracteresRomanos();
 
 	public String convertirNumeroDecimalToRomano(int valorConvertir) {
-		String resultado = "";
+		String resultadoFinal = "";
 
 		String cadenaInvertida = new StringBuilder().append(valorConvertir)
 				.reverse().toString();
@@ -21,9 +21,9 @@ public class Conversor {
 					cadenaInvertida.charAt(i), i));
 
 		while (!resultadoPreliminarPorPosicion.empty())
-			resultado += resultadoPreliminarPorPosicion.pop();
+			resultadoFinal += resultadoPreliminarPorPosicion.pop();
 
-		return resultado;
+		return resultadoFinal;
 	}
 
 	private String obtenerCaracterRomanoSegunPosicion(Character valor, int posicion) {
