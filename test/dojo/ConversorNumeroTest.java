@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+// test
 public class ConversorNumeroTest {
 	private Conversor conversor = null;
 	String resultadoConversion = null;
