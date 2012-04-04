@@ -15,6 +15,12 @@ public class ConversorNumeroTest {
 		resultadoConversion = "";
 	}
 
+    @Test
+	public void spartaaaa() {
+		resultadoConversion = conversor.convertirNumeroDecimalToRomano(1);
+		assertEquals("1", "1");
+	}
+
 	@Test
 	public void verificarConversionNumero1() {
 		resultadoConversion = conversor.convertirNumeroDecimalToRomano(1);
