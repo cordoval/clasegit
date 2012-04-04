@@ -328,5 +328,10 @@ public class ConversorNumeroTest {
 		resultadoConversion = conversor.convertirNumeroDecimalToRomano(3999);
 		assertEquals("MMMCMXCIX", resultadoConversion);
 	}
+	@Test
+	public void verificarConversionNumero3940() {
+		resultadoConversion = conversor.convertirNumeroDecimalToRomano(3999);
+		assertEquals("MMMCMXCIX", resultadoConversion);
+	}
 
 }
