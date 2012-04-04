@@ -333,11 +333,17 @@ public class ConversorNumeroTest {
 	public void verificarConversionNumero3999() {
 		resultadoConversion = conversor.convertirNumeroDecimalToRomano(3999);
 		assertEquals("MMMCMXCIX", resultadoConversion);
+		}
+
+	@Test
+	public void equalNumber(){
+		int num=0;
+		assertEquals(0,num);
 	}
+
 	@Test
 	public void verificarConversionNumero3940() {
 		resultadoConversion = conversor.convertirNumeroDecimalToRomano(3999);
 		assertEquals("MMMCMXCIX", resultadoConversion);
 	}
-
 }
